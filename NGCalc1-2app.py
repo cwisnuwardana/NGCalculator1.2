@@ -1,3 +1,8 @@
+# =========================================================
+# NATURAL GAS ENGINEERING TOOL
+# SUTO STYLE ENGINE + ERROR ANALYSIS
+# =========================================================
+
 import streamlit as st
 import pandas as pd
 from PIL import Image
@@ -35,20 +40,68 @@ st.header("Gas Composition (%)")
 col1, col2 = st.columns(2)
 
 with col1:
-    ch4 = st.number_input("CH4 (Methane)", value=90.00)
-    c2h6 = st.number_input("C2H6 (Ethane)", value=4.72)
-    c3h8 = st.number_input("C3H8 (Propane)", value=2.00)
-    c4h10 = st.number_input("C4H10 (Butane)", value=0.50)
-    n2 = st.number_input("N2 (Nitrogen)", value=1.80)
-    co2 = st.number_input("CO2 (Carbon Dioxide)", value=0.70)
+
+    ch4 = st.number_input(
+        "CH4 (Methane)",
+        value=90.00
+    )
+
+    c2h6 = st.number_input(
+        "C2H6 (Ethane)",
+        value=4.72
+    )
+
+    c3h8 = st.number_input(
+        "C3H8 (Propane)",
+        value=2.00
+    )
+
+    c4h10 = st.number_input(
+        "C4H10 (Butane)",
+        value=0.50
+    )
+
+    n2 = st.number_input(
+        "N2 (Nitrogen)",
+        value=1.80
+    )
+
+    co2 = st.number_input(
+        "CO2 (Carbon Dioxide)",
+        value=0.70
+    )
 
 with col2:
-    c5 = st.number_input("C5H12 (Pentane)", value=0.16)
-    c6 = st.number_input("C6H14 (Hexane)", value=0.12)
-    c7 = st.number_input("C7H16 (n-Heptane)", value=0.00)
-    c8 = st.number_input("C8H18 (3-Methylheptane)", value=0.00)
-    h2o = st.number_input("H2O (Water)", value=0.00)
-    h2s = st.number_input("H2S (Hydrogen Sulfide)", value=0.00)
+
+    c5 = st.number_input(
+        "C5H12 (Pentane)",
+        value=0.16
+    )
+
+    c6 = st.number_input(
+        "C6H14 (Hexane)",
+        value=0.12
+    )
+
+    c7 = st.number_input(
+        "C7H16 (n-Heptane)",
+        value=0.00
+    )
+
+    c8 = st.number_input(
+        "C8H18 (3-Methylheptane)",
+        value=0.00
+    )
+
+    h2o = st.number_input(
+        "H2O (Water)",
+        value=0.00
+    )
+
+    h2s = st.number_input(
+        "H2S (Hydrogen Sulfide)",
+        value=0.00
+    )
 
 # =========================================================
 # PROCESS CONDITION
@@ -58,11 +111,23 @@ st.header("Process Condition")
 col3, col4 = st.columns(2)
 
 with col3:
-    P_bar = st.number_input("Pressure (bar abs)", value=7.0)
-    T_C = st.number_input("Temperature (°C)", value=35.0)
+
+    P_bar = st.number_input(
+        "Pressure (bar abs)",
+        value=7.0
+    )
+
+    T_C = st.number_input(
+        "Temperature (°C)",
+        value=35.0
+    )
 
 with col4:
-    Z_manual = st.number_input("Manual Z Override (optional)", value=0.98)
+
+    Z_manual = st.number_input(
+        "Manual Z Override",
+        value=0.98
+    )
 
 # =========================================================
 # UNIT CONVERSION
@@ -71,11 +136,12 @@ P = P_bar * 100000
 T = T_C + 273.15
 
 # =========================================================
-# GAS PROPERTY TABLE
+# GAS PROPERTY DATABASE
 # =========================================================
 st.header("Gas Property Reference")
 
 gas_data = {
+
     "Component": [
         "CH4","C2H6","C3H8","C4H10",
         "N2","CO2","C5H12","C6H14",
@@ -113,16 +179,22 @@ df = pd.DataFrame(gas_data)
 # CATEGORY
 # =========================================================
 def category(comp):
+
     if comp in ["CH4","C2H6"]:
         return "Light Gas"
+
     elif comp in ["C3H8","C4H10"]:
         return "Medium"
+
     elif comp.startswith("C") and len(comp) > 3:
         return "Heavy (C5+)"
+
     elif comp == "N2":
         return "Inert"
+
     elif comp in ["CO2","H2S"]:
         return "Acid Gas"
+
     else:
         return "-"
 
@@ -130,12 +202,19 @@ def category(comp):
 # PHASE RISK
 # =========================================================
 def phase_risk(comp):
-    if comp in ["C5H12","C6H14","C7H16","C8H18"]:
+
+    if comp in [
+        "C5H12","C6H14",
+        "C7H16","C8H18"
+    ]:
         return "⚠️ Condensate"
+
     elif comp == "H2O":
         return "⚠️ Condensate"
+
     elif comp == "H2S":
         return "☠️ Corrosion Risk"
+
     else:
         return "Gas"
 
@@ -157,28 +236,38 @@ df["Rs Contribution"] = (
 # COLOR STYLE
 # =========================================================
 def highlight(row):
+
     if "Heavy" in row["Category"]:
         return ["background-color: #ffcccc"] * len(row)
+
     elif row["Category"] == "Medium":
         return ["background-color: #fff2cc"] * len(row)
+
     elif row["Category"] == "Light Gas":
         return ["background-color: #d9ead3"] * len(row)
+
     else:
         return [""] * len(row)
 
-styled_df = df.style.apply(highlight, axis=1)
+styled_df = df.style.apply(
+    highlight,
+    axis=1
+)
 
-st.dataframe(styled_df, use_container_width=True)
+st.dataframe(
+    styled_df,
+    use_container_width=True
+)
 
 # =========================================================
-# MIX CALCULATION (SUTO STYLE)
+# MIX CALCULATION
 # =========================================================
 Mmix = df["M Contribution"].sum()
 
 Rs_mix = 8314 / Mmix
 
 # =========================================================
-# NEAR AGA Z
+# NEAR AGA Z FACTOR
 # =========================================================
 P_pc = 46
 T_pc = 190
@@ -186,11 +275,15 @@ T_pc = 190
 P_pr = P_bar / P_pc
 T_pr = T / T_pc
 
-Z = 1 - (0.08 * P_pr / T_pr) + (0.015 * (P_pr**2)/(T_pr**2))
+Z = (
+    1
+    - (0.08 * P_pr / T_pr)
+    + (0.015 * (P_pr**2)/(T_pr**2))
+)
 
 Z = max(0.85, min(Z, 1.0))
 
-# manual override
+# Manual override
 if Z_manual != 0.98:
     Z = Z_manual
 
@@ -207,15 +300,157 @@ st.header("Calculated Mix Property")
 col5, col6, col7 = st.columns(3)
 
 with col5:
-    st.metric("Mmix (g/mol)", f"{Mmix:.2f}")
+
+    st.metric(
+        "Mmix (g/mol)",
+        f"{Mmix:.2f}"
+    )
 
 with col6:
-    st.metric("Rs Mix (J/kg·K)", f"{Rs_mix:.2f}")
+
+    st.metric(
+        "Rs Mix (J/kg·K)",
+        f"{Rs_mix:.2f}"
+    )
 
 with col7:
-    st.metric("Density (kg/m³)", f"{rho:.2f}")
 
-st.metric("Z factor (Near-AGA)", f"{Z:.3f}")
+    st.metric(
+        "Density (kg/m³)",
+        f"{rho:.2f}"
+    )
+
+st.metric(
+    "Z factor (Near-AGA)",
+    f"{Z:.3f}"
+)
+
+# =========================================================
+# ERROR ANALYSIS
+# =========================================================
+st.header("Error Analysis")
+
+# FLOW ERROR
+actual = st.number_input(
+    "Actual Flow (reference)",
+    value=100.0
+)
+
+measured = st.number_input(
+    "Measured Flow (S401)",
+    value=100.0
+)
+
+flow_error = (
+    (measured - actual) / actual
+) * 100
+
+st.metric(
+    "Flow Error (%)",
+    f"{flow_error:.2f}"
+)
+
+if flow_error > 0:
+
+    st.warning(
+        "⚠️ OVER-reading → S401 reading HIGHER than actual"
+    )
+
+elif flow_error < 0:
+
+    st.warning(
+        "⚠️ UNDER-reading → S401 reading LOWER than actual"
+    )
+
+else:
+
+    st.success(
+        "✅ Flow reading matched"
+    )
+
+# Rs ERROR
+st.subheader("Gas Constant (Rs) Error")
+
+R_actual = Rs_mix
+
+R_setting = st.number_input(
+    "Rs setting di S401",
+    value=370.0
+)
+
+error_rs = (
+    (R_actual / R_setting) - 1
+) * 100
+
+st.metric(
+    "Error akibat Rs (%)",
+    f"{error_rs:.2f}"
+)
+
+if error_rs > 0:
+
+    st.warning(
+        "⚠️ Rs setting terlalu kecil → S401 cenderung OVER-reading"
+    )
+
+    st.info(
+        f"""
+        Actual Rs = {R_actual:.2f} J/kg·K
+
+        S401 Rs = {R_setting:.2f} J/kg·K
+
+        Karena Rs setting lebih rendah,
+        thermal mass flow meter akan membaca
+        flow lebih tinggi dari actual.
+        """
+    )
+
+elif error_rs < 0:
+
+    st.warning(
+        "⚠️ Rs setting terlalu besar → S401 cenderung UNDER-reading"
+    )
+
+    st.info(
+        f"""
+        Actual Rs = {R_actual:.2f} J/kg·K
+
+        S401 Rs = {R_setting:.2f} J/kg·K
+
+        Karena Rs setting lebih tinggi,
+        thermal mass flow meter akan membaca
+        flow lebih rendah dari actual.
+        """
+    )
+
+else:
+
+    st.success(
+        "✅ Rs setting sudah sesuai"
+    )
+
+# =========================================================
+# ENGINEERING RECOMMENDATION
+# =========================================================
+st.subheader("Engineering Recommendation")
+
+if abs(error_rs) > 5:
+
+    st.error(
+        "🚨 Rs mismatch besar → recalibration recommended"
+    )
+
+elif abs(error_rs) > 2:
+
+    st.warning(
+        "⚠️ Rs mismatch moderat → monitor measurement accuracy"
+    )
+
+else:
+
+    st.success(
+        "✅ Rs mismatch acceptable"
+    )
 
 # =========================================================
 # VALIDATION
@@ -227,9 +462,16 @@ total = (
 )
 
 if abs(total - 100) > 0.1:
-    st.error(f"Total Composition = {total:.2f}% (Must be 100%)")
+
+    st.error(
+        f"Total Composition = {total:.2f}% (Must be 100%)"
+    )
+
 else:
-    st.success("Total Composition Gas OK (100%)")
+
+    st.success(
+        "Total Composition Gas OK (100%)"
+    )
 
 # =========================================================
 # WARNING SYSTEM
@@ -240,37 +482,77 @@ heavy = c5 + c6 + c7 + c8
 
 # Condensate
 if heavy > 1:
-    st.error("⚠️ HIGH Condensate Risk")
+
+    st.error(
+        "⚠️ HIGH Condensate Risk"
+    )
+
 elif heavy > 0.3:
-    st.warning("⚠️ Moderate Condensate Risk")
+
+    st.warning(
+        "⚠️ Moderate Condensate Risk"
+    )
+
 else:
-    st.success("✅ Low Condensate Risk")
+
+    st.success(
+        "✅ Low Condensate Risk"
+    )
 
 # CO2
 if co2 > 4:
-    st.error("⚠️ High CO2")
+
+    st.error(
+        "⚠️ High CO2"
+    )
+
 elif co2 > 2:
-    st.warning("⚠️ CO2 Increasing")
+
+    st.warning(
+        "⚠️ CO2 Increasing"
+    )
+
 else:
-    st.success("✅ CO2 Normal")
+
+    st.success(
+        "✅ CO2 Normal"
+    )
 
 # H2S
 if h2s > 0:
-    st.error("☠️ H2S Detected")
+
+    st.error(
+        "☠️ H2S Detected"
+    )
+
 else:
-    st.success("✅ No H2S detected")
+
+    st.success(
+        "✅ No H2S detected"
+    )
 
 # =========================================================
-# OVERALL
+# OVERALL ASSESSMENT
 # =========================================================
 st.header("Overall Assessment")
 
 if heavy > 1 or co2 > 4 or h2s > 0:
-    st.error("🚨 GAS CONDITION: ATTENTION REQUIRED")
+
+    st.error(
+        "🚨 GAS CONDITION: ATTENTION REQUIRED"
+    )
+
 elif heavy > 0.3 or co2 > 2:
-    st.warning("⚠️ GAS CONDITION: MONITORING")
+
+    st.warning(
+        "⚠️ GAS CONDITION: MONITORING"
+    )
+
 else:
-    st.success("✅ GAS CONDITION: STABLE")
+
+    st.success(
+        "✅ GAS CONDITION: STABLE"
+    )
 
 # =========================================================
 # SMART RECOMMENDATION
@@ -280,23 +562,38 @@ st.header("🧠 Smart Recommendation")
 recommendations = []
 
 if heavy > 1:
-    recommendations.append("➡️ Check separator / condensate removal")
+    recommendations.append(
+        "➡️ Check separator / condensate removal"
+    )
 
 elif heavy > 0.3:
-    recommendations.append("➡️ Monitor condensate trend")
+    recommendations.append(
+        "➡️ Monitor condensate trend"
+    )
 
 if co2 > 4:
-    recommendations.append("➡️ Evaluate CO2 treatment")
+    recommendations.append(
+        "➡️ Evaluate CO2 treatment"
+    )
 
 elif co2 > 2:
-    recommendations.append("➡️ Monitor CO2 trend")
+    recommendations.append(
+        "➡️ Monitor CO2 trend"
+    )
 
 if h2s > 0:
-    recommendations.append("➡️ Corrosion inspection recommended")
+    recommendations.append(
+        "➡️ Corrosion inspection recommended"
+    )
 
 if len(recommendations) == 0:
-    st.success("✅ No action required (Gas condition optimal)")
+
+    st.success(
+        "✅ No action required (Gas condition optimal)"
+    )
+
 else:
+
     for rec in recommendations:
         st.write(rec)
 
