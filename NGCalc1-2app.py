@@ -108,12 +108,11 @@ with col2:
 # =========================================================
 
 st.header("Process Condition")
-totalgas = (ch4 + c2h6 + c3h8 + c4h10 + n2 + co2 + c5h12 + c6h14 + c7h16 + c8h18 +h2s)
 st.caption("Custom for Others Gas")
 st.caption("Nm3/h use reference temperature : 15 DegC")
 st.caption("Sm3/h use reference temperature : 20 DegC")
 st.caption("Reference pressure (hPa) : 1013.2")
-st.metric("Total Gas Composition:", f"{totalgas:.2f} %")
+
 
 col3, col4 = st.columns(2)
 
@@ -518,24 +517,65 @@ else:
 # =========================================================
 # VALIDATION
 # =========================================================
+
+st.header("Gas Composition Validation")
+
 total = (
-    ch4+c2h6+c3h8+c4h10+
-    n2+co2+c5+c6+
-    c7+c8+h2o+h2s
+    ch4 + c2h6 + c3h8 + c4h10 +
+    n2 + co2 + c5 + c6 +
+    c7 + c8 + h2o + h2s
 )
 
-if abs(total - 100) > 0.1:
+# Display total
+st.metric(
+    "Total Gas Composition (%)",
+    f"{total:.2f}"
+)
 
-    st.error(
-        f"Total Composition = {total:.2f}% (Must be 100%)"
+difference = abs(100 - total)
+
+# =========================================================
+# VALIDATION LOGIC
+# =========================================================
+
+if difference < 0.01:
+
+    st.success(
+        """
+        ✅ Total Composition Gas OK (100%)
+
+        Gas composition sudah sesuai
+        dan valid untuk calculation.
+        """
+    )
+
+elif difference < 1:
+
+    st.warning(
+        f"""
+        ⚠️ Total composition slightly off
+
+        Current total = {total:.2f}%
+
+        Difference = {difference:.2f}%
+
+        Sebaiknya cek ulang input gas composition.
+        """
     )
 
 else:
 
-    st.success(
-        "Total Composition Gas OK (100%)"
-    )
+    st.error(
+        f"""
+        🚨 Total gas composition invalid
 
+        Current total = {total:.2f}%
+
+        Difference = {difference:.2f}%
+
+        Calculation dapat menjadi tidak akurat.
+        """
+    )
 # =========================================================
 # WARNING SYSTEM
 # =========================================================
