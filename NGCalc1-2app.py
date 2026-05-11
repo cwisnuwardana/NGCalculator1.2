@@ -107,9 +107,8 @@ with col2:
 # PROCESS CONDITION
 # =========================================================
 
-totalgas = (ch4 + c2h6 + c3h8 + c4h10 + n2 + co2 + c5h12 + c6h14 + c7h16 + c8h18 +h2s)
 st.header("Process Condition")
-
+totalgas = (ch4 + c2h6 + c3h8 + c4h10 + n2 + co2 + c5h12 + c6h14 + c7h16 + c8h18 +h2s)
 st.caption("Custom for Others Gas")
 st.caption("Nm3/h use reference temperature : 15 DegC")
 st.caption("Sm3/h use reference temperature : 20 DegC")
