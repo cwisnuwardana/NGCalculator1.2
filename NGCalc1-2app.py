@@ -387,6 +387,62 @@ st.metric(
     f"{error_rs:.2f}"
 )
 
+# =========================================================
+# FLOW READING SIMULATION
+# =========================================================
+
+st.subheader("Flow Reading Simulation")
+
+simulated_flow = (
+    actual *
+    (R_actual / R_setting)
+)
+
+st.metric(
+    "Simulated S401 Reading",
+    f"{simulated_flow:.2f}"
+)
+
+difference_flow = (
+    simulated_flow - actual
+)
+
+st.metric(
+    "Flow Difference",
+    f"{difference_flow:.2f}"
+)
+
+# Interpretation
+if simulated_flow > actual:
+
+    st.warning(
+        f"""
+        ⚠️ S401 berpotensi membaca
+        lebih tinggi sekitar
+        {difference_flow:.2f}
+
+        (OVER-reading)
+        """
+    )
+
+elif simulated_flow < actual:
+
+    st.warning(
+        f"""
+        ⚠️ S401 berpotensi membaca
+        lebih rendah sekitar
+        {abs(difference_flow):.2f}
+
+        (UNDER-reading)
+        """
+    )
+
+else:
+
+    st.success(
+        "✅ Simulated reading matched actual flow"
+    )
+
 if error_rs > 0:
 
     st.warning(
