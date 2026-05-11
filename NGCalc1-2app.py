@@ -108,11 +108,6 @@ with col2:
 # =========================================================
 
 st.header("Process Condition")
-st.caption("Custom for Others Gas")
-st.caption("Nm3/h use reference temperature : 15 DegC")
-st.caption("Sm3/h use reference temperature : 20 DegC")
-st.caption("Reference pressure (hPa) : 1013.2")
-
 
 col3, col4 = st.columns(2)
 
@@ -533,6 +528,11 @@ st.metric(
 )
 
 difference = abs(100 - total)
+
+st.caption("Custom for Others Gas")
+st.caption("Nm3/h use reference temperature : 15 DegC")
+st.caption("Sm3/h use reference temperature : 20 DegC")
+st.caption("Reference pressure (hPa) : 1013.2")
 
 # =========================================================
 # VALIDATION LOGIC
