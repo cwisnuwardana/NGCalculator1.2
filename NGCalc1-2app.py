@@ -418,8 +418,7 @@ if simulated_flow > actual:
 
     st.warning(
         f"""
-        ⚠️ S401 berpotensi membaca
-        lebih tinggi sekitar
+        ⚠️ S401 Potential overreading approximately 
         {difference_flow:.2f}
 
         (OVER-reading)
@@ -430,8 +429,7 @@ elif simulated_flow < actual:
 
     st.warning(
         f"""
-        ⚠️ S401 berpotensi membaca
-        lebih rendah sekitar
+        ⚠️ S401 Potential under-reading approximately 
         {abs(difference_flow):.2f}
 
         (UNDER-reading)
@@ -447,7 +445,7 @@ else:
 if error_rs > 0:
 
     st.warning(
-        "⚠️ Rs setting terlalu kecil → S401 cenderung OVER-reading"
+        "⚠️ Rs setting to small → S401 potential OVER-reading"
     )
 
     st.info(
@@ -456,16 +454,16 @@ if error_rs > 0:
 
         S401 Rs = {R_setting:.2f} J/kg·K
 
-        Karena Rs setting lebih rendah,
-        thermal mass flow meter akan membaca
-        flow lebih tinggi dari actual.
+        Because the Rs setting is lower, 
+        the thermal mass flowmeter will read 
+        flow higher than actual.
         """
     )
 
 elif error_rs < 0:
 
     st.warning(
-        "⚠️ Rs setting terlalu besar → S401 cenderung UNDER-reading"
+        "⚠️ Rs setting is to high → S401 potential UNDER-reading"
     )
 
     st.info(
@@ -474,16 +472,15 @@ elif error_rs < 0:
 
         S401 Rs = {R_setting:.2f} J/kg·K
 
-        Karena Rs setting lebih tinggi,
-        thermal mass flow meter akan membaca
-        flow lebih rendah dari actual.
-        """
+        Because the Rs setting is higher, 
+        the thermal mass flowmeter will read 
+        flow lower than actual.
     )
 
 else:
 
     st.success(
-        "✅ Rs setting sudah sesuai"
+        "✅ Rs setting are correct"
     )
 
 # =========================================================
@@ -544,8 +541,8 @@ if difference < 0.01:
         """
         ✅ Total Composition Gas OK (100%)
 
-        Gas composition sudah sesuai
-        dan valid untuk calculation.
+        Gas composition is appropriate 
+        and valid for calculation.
         """
     )
 
@@ -559,7 +556,7 @@ elif difference < 1:
 
         Difference = {difference:.2f}%
 
-        Sebaiknya cek ulang input gas composition.
+        It is better to double check the input gas composition.
         """
     )
 
@@ -573,7 +570,7 @@ else:
 
         Difference = {difference:.2f}%
 
-        Calculation dapat menjadi tidak akurat.
+        Calculation may be inaccurate.
         """
     )
 # =========================================================
