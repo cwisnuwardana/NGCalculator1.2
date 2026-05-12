@@ -547,29 +547,25 @@ if difference < 0.01:
 elif difference < 1:
 
     st.warning(
-        f"""
-        ⚠️ Total composition slightly off
+        f"⚠️ Total composition slightly off
 
         Current total = {total:.2f}%
 
         Difference = {difference:.2f}%
 
-        It is better to double check the input gas composition.
-        """
+        It is better to double check the input gas composition."
     )
 
 else:
 
     st.error(
-        f"""
-        🚨 Total gas composition invalid
+        f"🚨 Total gas composition invalid
 
         Current total = {total:.2f}%
 
         Difference = {difference:.2f}%
 
-        Calculation may be inaccurate.
-        """
+        Calculation may be inaccurate."
     )
 # =========================================================
 # WARNING SYSTEM
