@@ -538,12 +538,10 @@ st.caption("Reference pressure (hPa) : 1013.2")
 if difference < 0.01:
 
     st.success(
-        "
-        ✅ Total Composition Gas OK (100%)
+        "✅ Total Composition Gas OK (100%)
 
         Gas composition is appropriate 
-        and valid for calculation.
-        "
+        and valid for calculation."
     )
 
 elif difference < 1:
