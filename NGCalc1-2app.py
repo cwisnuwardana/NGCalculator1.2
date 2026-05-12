@@ -467,13 +467,15 @@ elif error_rs < 0:
     )
 
     st.info(
-        f"Actual Rs = {R_actual:.2f} J/kg·K
+        f"""
+        Actual Rs = {R_actual:.2f} J/kg·K
 
         S401 Rs = {R_setting:.2f} J/kg·K
 
         Because the Rs setting is higher, 
         the thermal mass flowmeter will read 
-        flow lower than actual."
+        flow lower than actual.
+        """
     )
 
 else:
