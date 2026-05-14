@@ -918,6 +918,51 @@ def generate_pdf():
 
     elements.append(Spacer(1, 20))
 
+# =====================================================
+# GAS COMPOSITION TABLE
+# =====================================================
+
+gas_table_data = [
+
+    ["Component", "Vol %"]
+
+]
+
+for i in range(len(df)):
+
+    gas_table_data.append([
+
+        df.iloc[i]["Component"],
+
+        f"{df.iloc[i]['Vol-%']:.2f}"
+
+    ])
+
+gas_table = Table(gas_table_data)
+
+gas_table.setStyle(TableStyle([
+
+    ('BACKGROUND', (0,0), (-1,0), colors.black),
+
+    ('TEXTCOLOR', (0,0), (-1,0), colors.yellow),
+
+    ('GRID', (0,0), (-1,-1), 1, colors.grey),
+
+    ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold')
+
+]))
+
+elements.append(
+    Paragraph(
+        "Gas Composition",
+        styles['Heading2']
+    )
+)
+
+elements.append(gas_table)
+
+elements.append(Spacer(1, 20))
+    
     # =====================================================
     # CALCULATED PROPERTY
     # =====================================================
@@ -1060,30 +1105,6 @@ project_name = st.text_input(
     value="Natural Gas System"
 )
 
-# =========================================================
-# PDF EXPORT
-# =========================================================
-
-st.header("Export Report")
-
-if st.button(
-    "Generate PDF Report",
-    key="pdf_button"
-):
-    generate_pdf()
-
-    with open(
-        "Gas_Report.pdf",
-        "rb"
-    ) as pdf_file:
-
-        st.download_button(
-            label="Download PDF",
-            data=pdf_file,
-            file_name="Gas_Report.pdf",
-            mime="application/pdf"
-        )
-        
 # =========================================================
 # EXPORT REPORT
 # =========================================================
