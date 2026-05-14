@@ -1,19 +1,24 @@
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    Table,
+    TableStyle
+)
+
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+
 # =========================================================
 # NATURAL GAS ENGINEERING TOOL
 # SUTO STYLE ENGINE + ERROR ANALYSIS
 # =========================================================
 
+import time
 import streamlit as st
 import pandas as pd
 from PIL import Image
 
-# =========================================================
-# PAGE CONFIG
-# =========================================================
-st.set_page_config(
-    page_title="Natural Gas Engineering Tool",
-    layout="wide"
-)
 
 # =========================================================
 # LOGO
@@ -23,6 +28,98 @@ try:
     st.image(logo, use_container_width=True)
 except:
     st.warning("Logo not found")
+
+# =========================================================
+# TRANSLATION
+# =========================================================
+
+if language == "English":
+
+    TXT_TITLE = "Natural Gas Engineering Suite"
+    TXT_GASCOMP = "Gas Composition"
+    TXT_PROCESS = "Process Conditions"
+    TXT_RESULT = "Calculated Properties"
+    TXT_WARNING = "Gas Quality Warning"
+    TXT_RECOMMEND = "Engineering Recommendation"
+
+else:
+
+    TXT_TITLE = "Suite Engineering Gas Alam"
+    TXT_GASCOMP = "Komposisi Gas"
+    TXT_PROCESS = "Kondisi Proses"
+    TXT_RESULT = "Hasil Perhitungan"
+    TXT_WARNING = "Peringatan Kualitas Gas"
+    TXT_RECOMMEND = "Rekomendasi Engineering"
+
+
+# =========================================================
+# PAGE CONFIG
+# =========================================================
+
+
+st.set_page_config(
+    page_title="CW GAS ENGINEER",
+    layout="wide"
+)
+
+# =========================================================
+# SPLASH SCREEN
+# =========================================================
+
+splash = st.empty()
+
+splash.markdown(
+    """
+    <style>
+    .splash-container {
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        height:70vh;
+        color:white;
+    }
+
+    .splash-title {
+        font-size:60px;
+        font-weight:bold;
+        color:#00b388;
+    }
+
+    .splash-sub {
+        font-size:24px;
+        color:#ffe000;
+    }
+    </style>
+
+    <div class="splash-container">
+        <div class="splash-title">CW</div>
+        <div class="splash-sub">SUTO GAS ENGINEER</div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+time.sleep(2)
+
+splash.empty()
+
+# =========================================================
+# LOADING SPINNER
+# =========================================================
+
+with st.spinner(
+    "Loading CW Gas Engineer Suite..."
+):
+    time.sleep(1.5)
+
+
+# =========================================================
+# MAIN DASHBOARD
+# =========================================================
+
+st.title("CW GAS ENGINEER")
+
 
 # =========================================================
 # TITLE
@@ -35,7 +132,7 @@ st.markdown("---")
 # =========================================================
 # GAS INPUT
 # =========================================================
-st.header("Gas Composition (%)")
+st.header(TXT_GASCOMP)
 
 col1, col2 = st.columns(2)
 
@@ -705,3 +802,83 @@ st.info("Pressure auto convert bar → Pa")
 st.info("Temperature auto convert °C → K")
 st.info("Calculation based on SUTO-style gas mix method")
 st.info("Near-AGA Z estimation for engineering purpose")
+
+# =========================================================
+# PDF REPORT
+# =========================================================
+
+def generate_pdf():
+
+    doc = SimpleDocTemplate(
+        "Gas_Report.pdf"
+    )
+
+    styles = getSampleStyleSheet()
+
+    elements = []
+
+    title = Paragraph(
+        "CW GAS ENGINEER REPORT",
+        styles['Title']
+    )
+
+    elements.append(title)
+    elements.append(Spacer(1, 20))
+
+    # =====================================================
+    # SUMMARY TABLE
+    # =====================================================
+
+    data = [
+
+        ["Parameter", "Value"],
+
+        ["Molecular Weight", f"{Mmix:.2f} g/mol"],
+
+        ["Gas Constant", f"{Rs_mix:.2f} J/kg.K"],
+
+        ["Density", f"{rho:.2f} kg/m3"],
+
+        ["Z Factor", f"{Z:.3f}"],
+
+        ["Pressure", f"{P_bar:.2f} barA"],
+
+        ["Temperature", f"{T_C:.2f} °C"]
+
+    ]
+
+    table = Table(data)
+
+    table.setStyle(TableStyle([
+
+        ('BACKGROUND', (0,0), (-1,0), colors.black),
+
+        ('TEXTCOLOR', (0,0), (-1,0), colors.yellow),
+
+        ('GRID', (0,0), (-1,-1), 1, colors.grey),
+
+        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+
+        ('BACKGROUND', (0,1), (-1,-1), colors.whitesmoke)
+
+    ]))
+
+    elements.append(table)
+
+    elements.append(Spacer(1, 20))
+
+    # =====================================================
+    # RECOMMENDATION
+    # =====================================================
+
+    rec = Paragraph(
+        """
+        Engineering assessment generated automatically
+        by CW GAS ENGINEER.
+        """,
+        styles['BodyText']
+    )
+
+    elements.append(rec)
+
+    doc.build(elements)
