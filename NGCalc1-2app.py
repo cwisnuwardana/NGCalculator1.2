@@ -963,27 +963,27 @@ elements.append(gas_table)
 
 elements.append(Spacer(1, 20))
     
-    # =====================================================
-    # CALCULATED PROPERTY
-    # =====================================================
+# =====================================================
+# CALCULATED PROPERTY
+# =====================================================
 
-    calc_data = [
+calc_data = [
 
-        ["Parameter", "Value"],
-
-        ["Molecular Weight", f"{Mmix:.2f} g/mol"],
-
-        ["Gas Constant", f"{Rs_mix:.2f} J/kg.K"],
-
-        ["Density", f"{rho:.2f} kg/m3"],
-
-        ["Z Factor", f"{Z:.3f}"],
-
-        ["Pressure", f"{P_bar:.2f} barA"],
-
-        ["Temperature", f"{T_C:.2f} °C"]
-
-    ]
+    ["Parameter", "Value"],
+    
+    ["Molecular Weight", f"{Mmix:.2f} g/mol"],
+    
+    ["Gas Constant", f"{Rs_mix:.2f} J/kg.K"],
+    
+    ["Density", f"{rho:.2f} kg/m3"],
+    
+    ["Z Factor", f"{Z:.3f}"],
+    
+    ["Pressure", f"{P_bar:.2f} barA"],
+    
+    ["Temperature", f"{T_C:.2f} °C"]
+    
+]
 
     calc_table = Table(calc_data)
 
