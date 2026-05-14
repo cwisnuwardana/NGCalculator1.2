@@ -1066,8 +1066,10 @@ project_name = st.text_input(
 
 st.header("Export Report")
 
-if st.button("Generate PDF Report"):
-
+if st.button(
+    "Generate PDF Report",
+    key="pdf_button"
+):
     generate_pdf()
 
     with open(
