@@ -29,6 +29,11 @@ try:
 except:
     st.warning("Logo not found")
 
+language = st.sidebar.selectbox(
+    "Language",
+    ["English", "Indonesia"]
+)
+
 # =========================================================
 # TRANSLATION
 # =========================================================
