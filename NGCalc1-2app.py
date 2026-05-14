@@ -887,3 +887,25 @@ def generate_pdf():
     elements.append(rec)
 
     doc.build(elements)
+
+# =========================================================
+# PDF EXPORT
+# =========================================================
+
+st.header("Export Report")
+
+if st.button("Generate PDF Report"):
+
+    generate_pdf()
+
+    with open(
+        "Gas_Report.pdf",
+        "rb"
+    ) as pdf_file:
+
+        st.download_button(
+            label="Download PDF",
+            data=pdf_file,
+            file_name="Gas_Report.pdf",
+            mime="application/pdf"
+        )
