@@ -1042,34 +1042,34 @@ if st.button(
     elements.append(title)
     elements.append(Spacer(1, 20))
 
-  # =====================================================
+# =====================================================
 # CUSTOMER INFO
 # =====================================================
 
-info_data = [
-
-    ["Customer", customer_name],
-
-    ["Project", project_name],
-
-    ["Date", report_date]
-
-]
-
-info_table = Table(info_data)
-
-info_table.setStyle(TableStyle([
-
-    ('GRID', (0,0), (-1,-1), 1, colors.grey),
-
-    ('BACKGROUND', (0,0), (0,-1), colors.lightgrey),
-
-    ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold')
-
-]))
-
-elements.append(info_table)
-elements.append(Spacer(1, 20))
+    info_data = [
+    
+        ["Customer", customer_name],
+    
+        ["Project", project_name],
+    
+        ["Date", report_date]
+    
+    ]
+    
+    info_table = Table(info_data)
+    
+    info_table.setStyle(TableStyle([
+    
+        ('GRID', (0,0), (-1,-1), 1, colors.grey),
+    
+        ('BACKGROUND', (0,0), (0,-1), colors.lightgrey),
+    
+        ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold')
+    
+    ]))
+    
+    elements.append(info_table)
+    elements.append(Spacer(1, 20))
 
 # =====================================================
 # GAS COMPOSITION
