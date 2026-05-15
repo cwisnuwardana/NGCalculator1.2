@@ -1072,50 +1072,50 @@ elements.append(info_table)
 
 elements.append(Spacer(1, 20))
 
-    # =====================================================
-    # GAS COMPOSITION
-    # =====================================================
+# =====================================================
+# GAS COMPOSITION
+# =====================================================
 
-    gas_table_data = [
+gas_table_data = [
 
-        ["Component", "Vol %"]
+    ["Component", "Vol %"]
 
-    ]
+]
 
-    for i in range(len(df)):
+for i in range(len(df)):
 
-        gas_table_data.append([
+    gas_table_data.append([
 
-            df.iloc[i]["Component"],
+        df.iloc[i]["Component"],
 
-            f"{df.iloc[i]['Vol-%']:.2f}"
+        f"{df.iloc[i]['Vol-%']:.2f}"
 
-        ])
+    ])
 
-    gas_table = Table(gas_table_data)
+gas_table = Table(gas_table_data)
 
-    gas_table.setStyle(TableStyle([
+gas_table.setStyle(TableStyle([
 
-        ('BACKGROUND', (0,0), (-1,0), colors.black),
+    ('BACKGROUND', (0,0), (-1,0), colors.black),
 
-        ('TEXTCOLOR', (0,0), (-1,0), colors.yellow),
+    ('TEXTCOLOR', (0,0), (-1,0), colors.yellow),
 
-        ('GRID', (0,0), (-1,-1), 1, colors.grey),
+    ('GRID', (0,0), (-1,-1), 1, colors.grey),
 
-        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold')
+    ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold')
 
-    ]))
+]))
 
-    elements.append(
-        Paragraph(
-            "Gas Composition",
-            styles['Heading2']
-        )
+elements.append(
+    Paragraph(
+        "Gas Composition",
+        styles['Heading2']
     )
+)
 
-    elements.append(gas_table)
+elements.append(gas_table)
 
-    elements.append(Spacer(1, 20))
+elements.append(Spacer(1, 20))
 
 # =====================================================
 # GAS COMPOSITION TABLE
