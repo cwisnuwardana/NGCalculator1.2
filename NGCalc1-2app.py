@@ -972,7 +972,6 @@ calc_table = Table(calc_data)
         ('BACKGROUND', (0,1), (-1,-1), colors.whitesmoke)
 
     ]))
-
     elements.append(
         Paragraph(
             "Calculated Properties",
