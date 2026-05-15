@@ -1069,6 +1069,7 @@ if st.button(
     ]))
     
     elements.append(info_table)
+    
     elements.append(Spacer(1, 20))
 
 # =====================================================
