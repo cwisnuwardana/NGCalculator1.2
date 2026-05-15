@@ -957,7 +957,7 @@ def generate_pdf():
 
     ]
 
-    calc_table = Table(calc_data)
+calc_table = Table(calc_data)
 
     calc_table.setStyle(TableStyle([
 
