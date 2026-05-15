@@ -832,177 +832,177 @@ project_name = st.text_input(
 def generate_pdf():
 
 doc = SimpleDocTemplate(
-    "Gas_Report.pdf"
+"Gas_Report.pdf"
 )
 
 styles = getSampleStyleSheet()
 
 elements = []
 
-    # =====================================================
-    # DATE
-    # =====================================================
+# =====================================================
+# DATE
+# =====================================================
 
-    report_date = datetime.now().strftime(
-        "%d-%m-%Y %H:%M"
-    )
-
-    # =====================================================
-    # TITLE
-    # =====================================================
-
-    title = Paragraph(
-        "CW GAS ENGINEER REPORT",
-        styles['Title']
-    )
-
-    elements.append(title)
-
-    elements.append(Spacer(1, 20))
-
-    # =====================================================
-    # CUSTOMER INFO
-    # =====================================================
-
-    info_data = [
-
-        ["Customer", customer_name],
-
-        ["Project", project_name],
-
-        ["Date", report_date]
-
-    ]
-
-    info_table = Table(info_data)
-
-    info_table.setStyle(TableStyle([
-
-        ('GRID', (0,0), (-1,-1), 1, colors.grey),
-
-        ('BACKGROUND', (0,0), (0,-1), colors.lightgrey),
-
-        ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold')
-
-    ]))
-
-    elements.append(info_table)
-
-    elements.append(Spacer(1, 20))
-
-    # =====================================================
-    # GAS COMPOSITION TABLE
-    # =====================================================
-
-    gas_table_data = [
-
-        ["Component", "Vol %"]
-
-    ]
-
-    for i in range(len(df)):
-
-        gas_table_data.append([
-
-            df.iloc[i]["Component"],
-
-            f"{df.iloc[i]['Vol-%']:.2f}"
-
-        ])
-
-    gas_table = Table(gas_table_data)
-
-    gas_table.setStyle(TableStyle([
-
-        ('BACKGROUND', (0,0), (-1,0), colors.black),
-
-        ('TEXTCOLOR', (0,0), (-1,0), colors.yellow),
-
-        ('GRID', (0,0), (-1,-1), 1, colors.grey),
-
-        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold')
-
-    ]))
-
-    elements.append(
-        Paragraph(
-            "Gas Composition",
-            styles['Heading2']
-        )
-    )
-
-    elements.append(gas_table)
-
-    elements.append(Spacer(1, 20))
+report_date = datetime.now().strftime(
+    "%d-%m-%Y %H:%M"
+)
 
 # =====================================================
-    # CALCULATED PROPERTY
-    # =====================================================
+# TITLE
+# =====================================================
 
-    calc_data = [
+title = Paragraph(
+    "CW GAS ENGINEER REPORT",
+    styles['Title']
+)
 
-        ["Parameter", "Value"],
+elements.append(title)
 
-        ["Molecular Weight", f"{Mmix:.2f} g/mol"],
+elements.append(Spacer(1, 20))
 
-        ["Gas Constant", f"{Rs_mix:.2f} J/kg.K"],
+# =====================================================
+# CUSTOMER INFO
+# =====================================================
 
-        ["Density", f"{rho:.2f} kg/m3"],
+info_data = [
 
-        ["Z Factor", f"{Z:.3f}"],
+    ["Customer", customer_name],
 
-        ["Pressure", f"{P_bar:.2f} barA"],
+    ["Project", project_name],
 
-        ["Temperature", f"{T_C:.2f} °C"]
+    ["Date", report_date]
 
-    ]
+]
 
-    calc_table = Table(calc_data)
+info_table = Table(info_data)
 
-    calc_table.setStyle(TableStyle([
+info_table.setStyle(TableStyle([
 
-        ('BACKGROUND', (0,0), (-1,0), colors.black),
+    ('GRID', (0,0), (-1,-1), 1, colors.grey),
 
-        ('TEXTCOLOR', (0,0), (-1,0), colors.yellow),
+    ('BACKGROUND', (0,0), (0,-1), colors.lightgrey),
 
-        ('GRID', (0,0), (-1,-1), 1, colors.grey),
+    ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold')
 
-        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+]))
 
-        ('BACKGROUND', (0,1), (-1,-1), colors.whitesmoke)
+elements.append(info_table)
 
-    ]))
+elements.append(Spacer(1, 20))
 
-    elements.append(
-        Paragraph(
-            "Calculated Properties",
-            styles['Heading2']
-        )
+# =====================================================
+# GAS COMPOSITION TABLE
+# =====================================================
+
+gas_table_data = [
+
+    ["Component", "Vol %"]
+
+]
+
+for i in range(len(df)):
+
+    gas_table_data.append([
+
+        df.iloc[i]["Component"],
+
+        f"{df.iloc[i]['Vol-%']:.2f}"
+
+    ])
+
+gas_table = Table(gas_table_data)
+
+gas_table.setStyle(TableStyle([
+
+    ('BACKGROUND', (0,0), (-1,0), colors.black),
+
+    ('TEXTCOLOR', (0,0), (-1,0), colors.yellow),
+
+    ('GRID', (0,0), (-1,-1), 1, colors.grey),
+
+    ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold')
+
+]))
+
+elements.append(
+    Paragraph(
+        "Gas Composition",
+        styles['Heading2']
     )
+)
 
-    elements.append(calc_table)
+elements.append(gas_table)
 
-    elements.append(Spacer(1, 20)) 
-    
-    # =====================================================
-    # ENGINEERING NOTE
-    # =====================================================
+elements.append(Spacer(1, 20))
 
-    note = Paragraph(
-        """
-        Engineering assessment generated automatically
-        by CW GAS ENGINEER.
-        """,
-        styles['BodyText']
+# =====================================================
+# CALCULATED PROPERTY
+# =====================================================
+
+calc_data = [
+
+    ["Parameter", "Value"],
+
+    ["Molecular Weight", f"{Mmix:.2f} g/mol"],
+
+    ["Gas Constant", f"{Rs_mix:.2f} J/kg.K"],
+
+    ["Density", f"{rho:.2f} kg/m3"],
+
+    ["Z Factor", f"{Z:.3f}"],
+
+    ["Pressure", f"{P_bar:.2f} barA"],
+
+    ["Temperature", f"{T_C:.2f} °C"]
+
+]
+
+calc_table = Table(calc_data)
+
+calc_table.setStyle(TableStyle([
+
+    ('BACKGROUND', (0,0), (-1,0), colors.black),
+
+    ('TEXTCOLOR', (0,0), (-1,0), colors.yellow),
+
+    ('GRID', (0,0), (-1,-1), 1, colors.grey),
+
+    ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+
+    ('BACKGROUND', (0,1), (-1,-1), colors.whitesmoke)
+
+]))
+
+elements.append(
+    Paragraph(
+        "Calculated Properties",
+        styles['Heading2']
     )
+)
 
-    elements.append(note)
+elements.append(calc_table)
 
-    # =====================================================
-    # BUILD PDF
-    # =====================================================
+elements.append(Spacer(1, 20)) 
 
-    doc.build(elements)
+# =====================================================
+# ENGINEERING NOTE
+# =====================================================
+
+note = Paragraph(
+    """
+    Engineering assessment generated automatically
+    by CW GAS ENGINEER.
+    """,
+    styles['BodyText']
+)
+
+elements.append(note)
+
+# =====================================================
+# BUILD PDF
+# =====================================================
+
+doc.build(elements)
 
 # =========================================================
 # EXPORT REPORT
