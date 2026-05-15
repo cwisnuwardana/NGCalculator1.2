@@ -831,13 +831,13 @@ project_name = st.text_input(
 
 def generate_pdf():
 
-    doc = SimpleDocTemplate(
-        "Gas_Report.pdf"
-    )
+doc = SimpleDocTemplate(
+    "Gas_Report.pdf"
+)
 
-    styles = getSampleStyleSheet()
+styles = getSampleStyleSheet()
 
-    elements = []
+elements = []
 
     # =====================================================
     # DATE
