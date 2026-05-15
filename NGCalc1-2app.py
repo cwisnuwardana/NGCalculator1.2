@@ -1046,6 +1046,7 @@ if st.button(
     # CUSTOMER INFO
     # =====================================================
 
+def generate_pdf():
     info_data = [
 
         ["Customer", customer_name],
