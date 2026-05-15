@@ -935,7 +935,7 @@ def generate_pdf():
 
     elements.append(Spacer(1, 20))
 
-    # =====================================================
+# =====================================================
     # CALCULATED PROPERTY
     # =====================================================
 
@@ -957,7 +957,7 @@ def generate_pdf():
 
     ]
 
-calc_table = Table(calc_data)
+    calc_table = Table(calc_data)
 
     calc_table.setStyle(TableStyle([
 
@@ -972,6 +972,7 @@ calc_table = Table(calc_data)
         ('BACKGROUND', (0,1), (-1,-1), colors.whitesmoke)
 
     ]))
+
     elements.append(
         Paragraph(
             "Calculated Properties",
@@ -981,8 +982,8 @@ calc_table = Table(calc_data)
 
     elements.append(calc_table)
 
-    elements.append(Spacer(1, 20))
-
+    elements.append(Spacer(1, 20)) 
+    
     # =====================================================
     # ENGINEERING NOTE
     # =====================================================
