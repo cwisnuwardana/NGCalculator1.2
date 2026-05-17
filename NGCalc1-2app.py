@@ -812,58 +812,58 @@ def generate_pdf():
 
     doc.build(elements)
 
-# =====================================================
-# GAS COMPOSITION
-# =====================================================
-
-gas_data = [
-
-    ["Component", "Vol %"],
-
-    ["CH4", ch4],
-    ["C2H6", c2h6],
-    ["C3H8", c3h8],
-    ["C4H10", c4h10],
-    ["N2", n2],
-    ["CO2", co2],
-
-    ["C5H12", c5],
-    ["C6H14", c6],
-    ["C7H16", c7],
-    ["C8H18", c8],
-
-    ["H2O", h2o],
-    ["H2S", h2s]
-
-]
-
-gas_table = Table(gas_data)
-
-gas_table.setStyle(TableStyle([
-
-    ('BACKGROUND',(0,0),(-1,0),colors.darkblue),
-    ('TEXTCOLOR',(0,0),(-1,0),colors.white),
-
-    ('GRID',(0,0),(-1,-1),1,colors.black),
-
-    ('FONTNAME',(0,0),(-1,0),'Helvetica-Bold'),
-
-    ('BACKGROUND',(0,1),(-1,-1),colors.beige)
-
-]))
-
-elements.append(
-    Paragraph(
-        "<b>Gas Composition</b>",
-        styles['Heading2']
+    # =====================================================
+    # GAS COMPOSITION
+    # =====================================================
+    
+    gas_data = [
+    
+        ["Component", "Vol %"],
+    
+        ["CH4", ch4],
+        ["C2H6", c2h6],
+        ["C3H8", c3h8],
+        ["C4H10", c4h10],
+        ["N2", n2],
+        ["CO2", co2],
+    
+        ["C5H12", c5],
+        ["C6H14", c6],
+        ["C7H16", c7],
+        ["C8H18", c8],
+    
+        ["H2O", h2o],
+        ["H2S", h2s]
+    
+    ]
+    
+    gas_table = Table(gas_data)
+    
+    gas_table.setStyle(TableStyle([
+    
+        ('BACKGROUND',(0,0),(-1,0),colors.darkblue),
+        ('TEXTCOLOR',(0,0),(-1,0),colors.white),
+    
+        ('GRID',(0,0),(-1,-1),1,colors.black),
+    
+        ('FONTNAME',(0,0),(-1,0),'Helvetica-Bold'),
+    
+        ('BACKGROUND',(0,1),(-1,-1),colors.beige)
+    
+    ]))
+    
+    elements.append(
+        Paragraph(
+            "<b>Gas Composition</b>",
+            styles['Heading2']
+        )
     )
-)
-
-elements.append(Spacer(1,10))
-
-elements.append(gas_table)
-
-elements.append(Spacer(1,20))
+    
+    elements.append(Spacer(1,10))
+    
+    elements.append(gas_table)
+    
+    elements.append(Spacer(1,20))
 
 # =====================================================
 # CALCULATED PROPERTY
