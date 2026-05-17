@@ -865,50 +865,50 @@ def generate_pdf():
     
     elements.append(Spacer(1,20))
 
-# =====================================================
-# CALCULATED PROPERTY
-# =====================================================
-
-calc_data = [
-
-    ["Property", "Value"],
-
-    ["Mmix (g/mol)", f"{mmix:.2f}"],
-
-    ["Rs Mix (J/kg.K)", f"{rs_mix:.2f}"],
-
-    ["Density (kg/m3)", f"{density:.2f}"],
-
-    ["Z Factor", f"{z_factor:.3f}"]
-
-]
-
-calc_table = Table(calc_data)
-
-calc_table.setStyle(TableStyle([
-
-    ('BACKGROUND',(0,0),(-1,0),colors.green),
-
-    ('TEXTCOLOR',(0,0),(-1,0),colors.white),
-
-    ('GRID',(0,0),(-1,-1),1,colors.black),
-
-    ('FONTNAME',(0,0),(-1,0),'Helvetica-Bold'),
-
-]))
-
-elements.append(
-    Paragraph(
-        "<b>Calculated Properties</b>",
-        styles['Heading2']
+    # =====================================================
+    # CALCULATED PROPERTY
+    # =====================================================
+    
+    calc_data = [
+    
+        ["Property", "Value"],
+    
+        ["Mmix (g/mol)", f"{mmix:.2f}"],
+    
+        ["Rs Mix (J/kg.K)", f"{rs_mix:.2f}"],
+    
+        ["Density (kg/m3)", f"{density:.2f}"],
+    
+        ["Z Factor", f"{z_factor:.3f}"]
+    
+    ]
+    
+    calc_table = Table(calc_data)
+    
+    calc_table.setStyle(TableStyle([
+    
+        ('BACKGROUND',(0,0),(-1,0),colors.green),
+    
+        ('TEXTCOLOR',(0,0),(-1,0),colors.white),
+    
+        ('GRID',(0,0),(-1,-1),1,colors.black),
+    
+        ('FONTNAME',(0,0),(-1,0),'Helvetica-Bold'),
+    
+    ]))
+    
+    elements.append(
+        Paragraph(
+            "<b>Calculated Properties</b>",
+            styles['Heading2']
+        )
     )
-)
-
-elements.append(Spacer(1,10))
-
-elements.append(calc_table)
-
-elements.append(Spacer(1,20))
+    
+    elements.append(Spacer(1,10))
+    
+    elements.append(calc_table)
+    
+    elements.append(Spacer(1,20))
 
 # =====================================================
 # EXPORT BUTTON
