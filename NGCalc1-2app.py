@@ -871,18 +871,13 @@ def generate_pdf():
     
     calc_data = [
     
-        ["Property", "Value"],
-    
-        ["Mmix (g/mol)", f"{mmix:.2f}"],
-    
-        ["Rs Mix (J/kg.K)", f"{rs_mix:.2f}"],
-    
-        ["Density (kg/m3)", f"{density:.2f}"],
-    
-        ["Z Factor", f"{z_factor:.3f}"]
-    
-    ]
-    
+        property_data = [
+            ["Property", "Value"],
+            ["Mmix (g/mol)", str(mmix)],
+            ["Rs Mix (J/kg.K)", str(rs_mix)],
+            ["Density (kg/m3)", str(density)],
+            ["Z Factor", str(z_factor)]
+    ]    
     calc_table = Table(calc_data)
     
     calc_table.setStyle(TableStyle([
