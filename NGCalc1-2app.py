@@ -1158,10 +1158,9 @@ gas_table.setStyle(TableStyle([
     )
 )
 
-    elements.append(gas_table)
+elements.append(gas_table)
+elements.append(Spacer(1, 20))
 
-    elements.append(Spacer(1, 20))
-    
 # =====================================================
 # CALCULATED PROPERTY
 # =====================================================
