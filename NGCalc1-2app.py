@@ -763,15 +763,6 @@ st.info("Calculation based on SUTO-style gas mix method")
 st.info("Near-AGA Z estimation for engineering purpose")
 
 # =========================================================
-# LOGO
-# =========================================================
-try:
-    logo = Image.open("suto_logo.png")
-    st.image(logo, use_container_width=True)
-except:
-    st.warning("Logo not found")
-
-# =========================================================
 # TITLE
 # =========================================================
 st.title("Natural Gas Engineering Tool")
@@ -821,6 +812,98 @@ def generate_pdf():
 
     doc.build(elements)
 
+# =====================================================
+# GAS COMPOSITION
+# =====================================================
+
+gas_data = [
+    ["Component", "Vol %"],
+    ["CH4", ch4],
+    ["C2H6", c2h6],
+    ["C3H8", c3h8],
+    ["C4H10", c4h10],
+    ["N2", n2],
+    ["CO2", co2],
+    ["C5H12", c5h12],
+    ["C6H14", c6h14],
+    ["C7H16", c7h16],
+    ["C8H18", c8h18],
+    ["H2O", h2o],
+    ["H2S", h2s]
+]
+
+gas_table = Table(gas_data)
+
+gas_table.setStyle(TableStyle([
+
+    ('BACKGROUND',(0,0),(-1,0),colors.darkblue),
+    ('TEXTCOLOR',(0,0),(-1,0),colors.white),
+
+    ('GRID',(0,0),(-1,-1),1,colors.black),
+
+    ('FONTNAME',(0,0),(-1,0),'Helvetica-Bold'),
+
+    ('BACKGROUND',(0,1),(-1,-1),colors.beige)
+
+]))
+
+elements.append(
+    Paragraph(
+        "<b>Gas Composition</b>",
+        styles['Heading2']
+    )
+)
+
+elements.append(Spacer(1,10))
+
+elements.append(gas_table)
+
+elements.append(Spacer(1,20))
+
+# =====================================================
+# CALCULATED PROPERTY
+# =====================================================
+
+calc_data = [
+
+    ["Property", "Value"],
+
+    ["Mmix (g/mol)", f"{mmix:.2f}"],
+
+    ["Rs Mix (J/kg.K)", f"{rs_mix:.2f}"],
+
+    ["Density (kg/m3)", f"{density:.2f}"],
+
+    ["Z Factor", f"{z_factor:.3f}"]
+
+]
+
+calc_table = Table(calc_data)
+
+calc_table.setStyle(TableStyle([
+
+    ('BACKGROUND',(0,0),(-1,0),colors.green),
+
+    ('TEXTCOLOR',(0,0),(-1,0),colors.white),
+
+    ('GRID',(0,0),(-1,-1),1,colors.black),
+
+    ('FONTNAME',(0,0),(-1,0),'Helvetica-Bold'),
+
+]))
+
+elements.append(
+    Paragraph(
+        "<b>Calculated Properties</b>",
+        styles['Heading2']
+    )
+)
+
+elements.append(Spacer(1,10))
+
+elements.append(calc_table)
+
+elements.append(Spacer(1,20))
 
 # =====================================================
 # EXPORT BUTTON
