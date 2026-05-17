@@ -1030,17 +1030,17 @@ if st.button(
             key="download_pdf"
         )
 
-    # =====================================================
-    # TITLE
-    # =====================================================
+# =====================================================
+# TITLE
+# =====================================================
 
-    title = Paragraph(
-        "CW GAS ENGINEER REPORT",
-        styles['Title']
-    )
+title = Paragraph(
+    "CW GAS ENGINEER REPORT",
+    styles['Title']
+)
 
-    elements.append(title)
-    elements.append(Spacer(1, 20))
+elements.append(title)
+elements.append(Spacer(1, 20))
 
 # =====================================================
 # CUSTOMER INFO
