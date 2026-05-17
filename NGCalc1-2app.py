@@ -132,6 +132,32 @@ with col2:
         value=0.00
     )
 
+# =====================================================
+# CUSTOMER INFORMATION
+# =====================================================
+
+st.subheader("Customer Information")
+
+col1, col2 = st.columns(2)
+
+with col1:
+
+    customer_name = st.text_input(
+        "Customer Name",
+        value="Customer"
+    )
+
+with col2:
+
+    project_name = st.text_input(
+        "Project Name",
+        value="Natural Gas Analysis"
+    )
+
+report_date = datetime.now().strftime(
+    "%d-%m-%Y %H:%M"
+)
+
 # =========================================================
 # PROCESS CONDITION
 # =========================================================
