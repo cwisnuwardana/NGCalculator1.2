@@ -424,4 +424,7 @@ if st.button("Generate PDF Report"):
         st.download_button(
             label="Download PDF",
             data=pdf_file,
-            file_name="Gas_Report
+            file_name="Gas_Report.pdf"
+            mime="application/pdf"
+        )
+    st.success("Pdf generated successfully")
