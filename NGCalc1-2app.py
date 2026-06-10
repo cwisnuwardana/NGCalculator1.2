@@ -23,6 +23,11 @@ from reportlab.lib.pagesizes import A4
 # =========================================================
 # PAGE CONFIG
 # =========================================================
+
+st.set_page_config(
+    page_icon="CW Icon.png"
+    )
+
 st.set_page_config(
     page_title="Natural Gas Engineering Tool",
     layout="wide"
