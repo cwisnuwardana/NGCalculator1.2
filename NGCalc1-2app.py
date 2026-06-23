@@ -5,6 +5,9 @@
 
 import streamlit as st
 import pandas as pd
+from suto_footer import (
+    show_suto_footer
+)
 from datetime import datetime
 from PIL import Image
 from reportlab.platypus import (
@@ -767,14 +770,7 @@ st.info("Temperature auto convert °C → K")
 st.info("Calculation based on SUTO-style gas mix method")
 st.info("Near-AGA Z estimation for engineering purpose")
 
-# =========================================================
-# TITLE
-# =========================================================
-st.title("Natural Gas Engineering Tool")
-st.caption("SUTO iTEC Style Application")
-
-st.markdown("---")
-
+show_suto_footer()
 
 # =====================================================
 # PDF REPORT GENERATOR
