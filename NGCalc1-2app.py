@@ -771,8 +771,6 @@ st.info("Temperature auto convert °C → K")
 st.info("Calculation based on SUTO-style gas mix method")
 st.info("Near-AGA Z estimation for engineering purpose")
 
-show_suto_footer()
-
 # =====================================================
 # PDF REPORT GENERATOR
 # =====================================================
@@ -931,3 +929,4 @@ if st.button("Generate PDF Report"):
             file_name="Gas_Report.pdf",
             mime="application/pdf"
         )
+show_suto_footer()
