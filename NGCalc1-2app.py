@@ -5,6 +5,7 @@
 
 import streamlit as st
 import pandas as pd
+
 from suto_footer import (
     show_suto_footer
 )
